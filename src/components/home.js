@@ -14,19 +14,15 @@ class Home extends Component {
         FirebaseService.ref.child(`/users/${key}`).on("value", (snapshot) => {
             if (snapshot.val()) {
                 this.props.Loggedin(snapshot.val())
+                console.log(this.props.authReducer.user)
             }
         })
-        setTimeout(() => {
-        console.log(this.props.authReducer.user.email)
-
-        },3000)
-
     }
 
     render() {
         return (
             <div className="App">
-                <h1>Hello{ this.props.authReducer.user.email}</h1>
+                <h1>Hello{Home}</h1>
                 <Link to="/homenested">Home</Link>
                 <Link to="/aboutnested">About</Link>
                 {this.props.children}
