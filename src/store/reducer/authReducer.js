@@ -12,6 +12,9 @@ const AuthReducer = (state = InitalState, action) => {
 
         case "signin":
             return Object.assign(state, { user: action.value, isLoggedin: true })
+    
+        case "loggedin":
+            return Object.assign(state, { user: action.value, isLoggedin: true })
     }
     return state
 }

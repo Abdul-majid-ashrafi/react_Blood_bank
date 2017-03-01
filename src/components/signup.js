@@ -32,7 +32,8 @@ class Register extends Component {
             lastname: this.state.lastname,
             age: this.state.age,
             email: this.state.email,
-            pass: this.state.pass
+            pass: this.state.pass,
+            blood: this.state.blood
         }
         // console.log(this.state)
         FirebaseService.customAuth(newUser).then((user) => {
@@ -46,7 +47,6 @@ class Register extends Component {
                 pathname: "/home"
             })
         }).catch((error) => alert(error.message))
-
     }
     render() {
         return (

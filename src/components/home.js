@@ -1,13 +1,32 @@
 import React, { Component } from 'react';
-// import logo from './logo.svg';
-// import './App.css';
+import { Loggedin } from '../store/action/auth'
+import { connect } from 'react-redux'
 import { Link } from 'react-router';
+import { FirebaseService } from '../helpers/firebaseService'
+
+
 
 class Home extends Component {
+    constructor(props) {
+        super(props)
+
+        let key = localStorage.getItem('currentUser')
+        FirebaseService.ref.child(`/users/${key}`).on("value", (snapshot) => {
+            if (snapshot.val()) {
+                this.props.Loggedin(snapshot.val())
+            }
+        })
+        setTimeout(() => {
+        console.log(this.props.authReducer.user.email)
+
+        },3000)
+
+    }
+
     render() {
         return (
             <div className="App">
-                <h1>Hello Home</h1>
+                <h1>Hello{ this.props.authReducer.user.email}</h1>
                 <Link to="/homenested">Home</Link>
                 <Link to="/aboutnested">About</Link>
                 {this.props.children}
@@ -15,5 +34,17 @@ class Home extends Component {
         );
     }
 }
-
-export default Home;
+const mapStateToProps = (state) => { // mapStateToProps ye iska apna function he
+    return {
+        authReducer: state
+    }
+}
+const mapDispatchToProps = (dispatch) => { // mapDispatchToProps ye iska apna function he
+    return {
+        Loggedin: (data) => {
+            dispatch(Loggedin(data))
+        }
+    }
+}
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
+// export default Home;

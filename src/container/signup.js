@@ -1,71 +1,80 @@
 import * as React from "react";
+import TextField from 'material-ui/TextField';
+import RaisedButton from 'material-ui/RaisedButton';
+import AppBar from 'material-ui/AppBar';
 
 export class SignupComponent extends React.Component {
-    render() {
-        return (
-            <div className="container text-center" style={{ marginTop: "50px" }}>
-                <form onSubmit={this.props._submit} >
-                    <div>
-                        <label htmlFor="Firstname" className="pull-left">Firstname</label>
-                        <input type="text" name="firstname"
-                            value={this.props.signUpState.firstname}
-                            className="form-control"
-                            placeholder="Firstname"
-                            required autoFocus
-                            onChange={this.props._inputHandler}
-                            />
-                    </div>
-                    <div>
-                        <br />
-                        <label htmlFor="Lastname" className="pull-left">Lastname</label>
-                        <input type="text" name="lastname"
-                            value={this.props.signUpState.lastname}
-                            className="form-control"
-                            placeholder="Lastname"
-                            required
-                            onChange={this.props._inputHandler}
-                            />
-                        <br />
-                    </div>
 
-                    <div>
-                        <label htmlFor="Username" className="pull-left"><span>User age</span></label>
-                        <input type="text" name="age"
-                            value={this.props.signUpState.age}
-                            className="form-control"
-                            placeholder="User age"
-                            required
-                            onChange={this.props._inputHandler}
-                            />
-                        <br />
-                    </div>
-                    <div>
-                        <label htmlFor="inputEmail" className="pull-left">Email address</label>
-                        <input type="email" name="email"
-                            value={this.props.signUpState.email}
-                            className="form-control"
-                            placeholder="Email address"
-                            required
-                            onChange={this.props._inputHandler}
-                            />
-                    </div>
+    render() {
+        const center = {
+            width: '90%',
+            margin: '0 auto'
+        }
+        return (
+            <div style={center}>
+                <AppBar
+                    title="Register your account"
+                    showMenuIconButton={false} />
+                <form onSubmit={this.props._submit} >
+                    <TextField
+                        hintText="First Name"
+                        name="firstname"
+                        value={this.props.signUpState.firstname}
+                        required fullWidth autoFocus
+                        onChange={this.props._inputHandler}
+                    /><br />
+
+                    <TextField
+                        hintText="Last Name"
+                        name="lastname"
+                        value={this.props.signUpState.lastname}
+                        required fullWidth
+                        onChange={this.props._inputHandler}
+                    /><br />
+
+                    <TextField
+                        hintText="Age"
+                        name="age"
+                        value={this.props.signUpState.age}
+                        required fullWidth
+                        onChange={this.props._inputHandler}
+                    /><br />
+
+                    <TextField
+                        hintText="email"
+                        name="email"
+                        value={this.props.signUpState.email}
+                        required fullWidth
+                        onChange={this.props._inputHandler}
+                    /><br />
+
+                    <TextField
+                        hintText="Password"
+                        name="pass"
+                        value={this.props.signUpState.pass}
+                        required fullWidth
+                        onChange={this.props._inputHandler}
+                    /><br />
+
                     <br />
-                    {!this.props.isProfileRoute &&
-                        <div >
-                            <label htmlFor="inputPassword" className="pull-left">Password</label>
-                            <input type="password" name="pass"
-                                value={this.props.signUpState.pass}
-                                className="form-control"
-                                placeholder="Password"
-                                required
-                                onChange={this.props._inputHandler}
-                                />
-                        </div>
-                    }
+                    <select
+                        placeholder="Blood"
+                        name="blood"
+                        value={this.props.signUpState.blood}
+                        required
+                        onChange={this.props._inputHandler}>
+                        <option value="A+">A+   </option>
+                        <option value="A-">A-   </option>
+                        <option value="B+">B+   </option>
+                        <option value="B-">B-   </option>
+                        <option value="O+">O+   </option>
+                        <option value="O-">O-   </option>
+                        <option value="AB+">AB+</option>
+                        <option value="AB-">AB-</option>
+                    </select>
                     <br />
-                    <button type="submit" >
-                        {this.props.isProfileRoute ? <span>Update</span> : <span>Sign up</span>}
-                    </button>
+                    <br />
+                    <RaisedButton type="submit" label="Sign up" primary={true} /> <br />
                 </form>
             </div>
         )
@@ -76,4 +85,3 @@ SignupComponent.PropTypes = {
     _submit: React.PropTypes.func.isRequired
 
 }
-// export default SignupComponent;

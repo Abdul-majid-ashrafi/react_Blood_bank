@@ -1,11 +1,11 @@
 import * as firebase from 'firebase';
 
 var config = {
-    apiKey: "AIzaSyCXs2qMUazezjisKUS2ICNAKbasCkJdGDQ",
-    authDomain: "react-sample-17caa.firebaseapp.com",
-    databaseURL: "https://react-sample-17caa.firebaseio.com",
-    storageBucket: "react-sample-17caa.appspot.com",
-    messagingSenderId: "411422279834"
+    apiKey: "AIzaSyC1eV5IYuPTmF4uC_Zx9Xq9xzjmV-fQW3A",
+    authDomain: "react-bloodapp.firebaseapp.com",
+    databaseURL: "https://react-bloodapp.firebaseio.com",
+    storageBucket: "react-bloodapp.appspot.com",
+    messagingSenderId: "241367930399"
 };
 firebase.initializeApp(config);
 export class FirebaseService {
@@ -29,7 +29,7 @@ export class FirebaseService {
         return this.auth.signInWithEmailAndPassword(user.email, user.pass);
     } //loginUser
 
-    static addNewUser (user) {
+    static addNewUser(user) {
         return this.ref.child(user).set();
     } //AuthNewUser
 
