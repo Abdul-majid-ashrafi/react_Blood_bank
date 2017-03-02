@@ -33,8 +33,10 @@ class Register extends Component {
             age: this.state.age,
             email: this.state.email,
             pass: this.state.pass,
-            blood: this.state.blood
+            blood: this.state.blood,
+            type: this.state.type
         }
+        // {(this.state.type === 'donor') ? console.log("Me Donor hn")  : console.log("Me Recipient hn")}
         // console.log(this.state)
         FirebaseService.customAuth(newUser).then((user) => {
             multipath[`users/${user.uid}`] = newUser;

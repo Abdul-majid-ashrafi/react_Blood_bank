@@ -6,6 +6,12 @@ import AppBar from 'material-ui/AppBar';
 export class SignupComponent extends React.Component {
 
     render() {
+        const style = {
+            fontSize: '17px',
+            padding: '2px 23px 2px 23px',
+            boxShadow: '5px 5px 5px black',
+            border: 'outset 3px red'
+        }
         const center = {
             width: '90%',
             margin: '0 auto'
@@ -22,7 +28,7 @@ export class SignupComponent extends React.Component {
                         value={this.props.signUpState.firstname}
                         required fullWidth autoFocus
                         onChange={this.props._inputHandler}
-                    /><br />
+                        /><br />
 
                     <TextField
                         hintText="Last Name"
@@ -30,7 +36,7 @@ export class SignupComponent extends React.Component {
                         value={this.props.signUpState.lastname}
                         required fullWidth
                         onChange={this.props._inputHandler}
-                    /><br />
+                        /><br />
 
                     <TextField
                         hintText="Age"
@@ -38,31 +44,45 @@ export class SignupComponent extends React.Component {
                         value={this.props.signUpState.age}
                         required fullWidth
                         onChange={this.props._inputHandler}
-                    /><br />
+                        /><br />
 
                     <TextField
+                        type="email"
                         hintText="email"
                         name="email"
                         value={this.props.signUpState.email}
                         required fullWidth
                         onChange={this.props._inputHandler}
-                    /><br />
+                        /><br />
 
                     <TextField
+                        type="password"
                         hintText="Password"
                         name="pass"
                         value={this.props.signUpState.pass}
                         required fullWidth
                         onChange={this.props._inputHandler}
-                    /><br />
+                        /><br />
 
                     <br />
-                    <select
-                        placeholder="Blood"
+                    <select style={style}
+                        name="type"
+                        value={this.props.signUpState.type}
+                        required
+                        onChange={this.props._inputHandler}>
+                        <option>User Type   </option>
+                        <option value="donor">Donor  </option>
+                        <option value="recipient">Recipient  </option>
+                    </select>
+                    <br />
+                    <br />
+
+                    <select style={style}
                         name="blood"
                         value={this.props.signUpState.blood}
                         required
                         onChange={this.props._inputHandler}>
+                        <option>Blood Type   </option>
                         <option value="A+">A+   </option>
                         <option value="A-">A-   </option>
                         <option value="B+">B+   </option>

@@ -21,18 +21,20 @@ export class SigninComponent extends React.Component {
                     showMenuIconButton={false} />
                 <form onSubmit={this.props._submit}>
                     <TextField
+                        type="email"
                         hintText="email"
                         name="email"
                         onChange={this.props._inputHandler}
                         required fullWidth
-                    /><br />
+                        /><br />
 
                     <TextField
+                        type="password"
                         hintText="password"
                         name="pass"
                         onChange={this.props._inputHandler}
                         required fullWidth
-                    /><br />
+                        /><br />
                     <RaisedButton type="submit" label="Sign in" primary={true} />
                 </form>
                 <div style={{ marginTop: "10px" }}> Don't have account?? <Link to="/" style={{ cursor: "pointer" }}>Create an account.</Link>

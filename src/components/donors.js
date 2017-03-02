@@ -2,12 +2,11 @@ import React, { Component } from 'react';
 // import logo from './logo.svg';
 // import './App.css';
 
-class NestedHome extends Component {
+class Donors extends Component {
     render() {
         return (
             <div className="App">
-                <h1>Hello nested Home</h1>
-                
+                <h1>Hello Donors</h1>
             </div>
 
 
@@ -17,4 +16,4 @@ class NestedHome extends Component {
     }
 }
 
-export default NestedHome;
+export default Donors;

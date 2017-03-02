@@ -25,9 +25,10 @@ class Login extends Component {
         FirebaseService.customLogin(this.state)
             .then((user) => {
                 this.props.signInUser(user)
+                localStorage.setItem('currentUser', user.uid);
                 this.context.router.push({
                     pathname: '/home',
-                    state: this.props.user
+                    // state: this.props.user
                 })
             })
             .catch((error) => alert(error.message))
