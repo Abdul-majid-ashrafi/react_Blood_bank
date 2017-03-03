@@ -34,10 +34,12 @@ class Register extends Component {
             email: this.state.email,
             pass: this.state.pass,
             blood: this.state.blood,
-            type: this.state.type
+            // type: this.state.type,
+            A: ["A", "O"].indexOf(this.state.blood)!== -1 ? true : null,
+            AB: ["A", "O", "AB", "B"].indexOf(this.state.blood)!== -1 ? true : null,
+            B: ["B", "O"].indexOf(this.state.blood)!== -1 ? true : null,
+            O: ["O"].indexOf(this.state.blood)!== -1 ? true : null
         }
-        // {(this.state.type === 'donor') ? console.log("Me Donor hn")  : console.log("Me Recipient hn")}
-        // console.log(this.state)
         FirebaseService.customAuth(newUser).then((user) => {
             multipath[`users/${user.uid}`] = newUser;
             FirebaseService.saveMultipath(multipath)

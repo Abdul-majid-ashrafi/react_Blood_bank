@@ -63,17 +63,6 @@ export class SignupComponent extends React.Component {
                         required fullWidth
                         onChange={this.props._inputHandler}
                         /><br />
-
-                    <br />
-                    <select style={style}
-                        name="type"
-                        value={this.props.signUpState.type}
-                        required
-                        onChange={this.props._inputHandler}>
-                        <option>User Type   </option>
-                        <option value="donor">Donor  </option>
-                        <option value="recipient">Recipient  </option>
-                    </select>
                     <br />
                     <br />
 
@@ -83,14 +72,10 @@ export class SignupComponent extends React.Component {
                         required
                         onChange={this.props._inputHandler}>
                         <option>Blood Type   </option>
-                        <option value="A+">A+   </option>
-                        <option value="A-">A-   </option>
-                        <option value="B+">B+   </option>
-                        <option value="B-">B-   </option>
-                        <option value="O+">O+   </option>
-                        <option value="O-">O-   </option>
-                        <option value="AB+">AB+</option>
-                        <option value="AB-">AB-</option>
+                        <option value="A">A+   </option>
+                        <option value="B">B+   </option>
+                        <option value="O">O+   </option>
+                        <option value="AB">AB+</option>
                     </select>
                     <br />
                     <br />

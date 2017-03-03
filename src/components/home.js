@@ -17,35 +17,36 @@ class Home extends Component {
     constructor(props) {
         super(props)
         this.state = {
-            name: this.props.authReducer.user.firstname
+            // name: this.props.authReducer.user.firstname
         }
     }
 
     componentWillMount() {
         let key = localStorage.getItem('currentUser')
-        FirebaseService.ref.child(`/users`).on("child_added", (snapshot) => {
-            if (snapshot.val().type === 'donor') {
+        // FirebaseService.ref.child(`/users`).on("child_added", (snapshot) => {
+        //     if (snapshot.val().type === 'donor') {
 
-            console.log(snapshot.val())
-            }
-        })
+        //     console.log(snapshot.val())
+        //     }
+        // })
         FirebaseService.ref.child(`/users/${key}`).on("value", (snapshot) => {
             if (snapshot.val()) {
-                this.setState({
-                    name: snapshot.val().firstname + " " + snapshot.val().lastname
-                })
+                // this.setState({
+                    // name: snapshot.val().firstname + " " + snapshot.val().lastname
+                // })
                 this.props.Loggedin(snapshot.val())
             }
         })
     }
     render() {
-        setInterval(() => {
-            (this.props.authReducer.user.type === 'donor') ? this.setState(<h1></h1>) : <h1></h1>
-        }, 200)
+        // console.log(this.state.name)
+        // setInterval(() => {
+            // (this.props.authReducer.user.type === 'donor') ? this.setState(<h1>m</h1>) : <h1>a</h1>
+        // }, 200)
         return (
             <div className="App">
                 <h1>Hello {this.state.name}</h1>
-                {(this.props.authReducer.user.type === 'donor') ?
+                {(this.props.authReducer.AuthReducer.user.type === 'donor') ?
 
                     <div style={styles.root}>
                         <h1>mani </h1>
