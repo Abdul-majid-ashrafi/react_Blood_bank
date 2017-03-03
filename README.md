@@ -1,1 +1,2 @@
-Routing and Nested Routing done on React with JSX.
+### npm install
+### npm start
