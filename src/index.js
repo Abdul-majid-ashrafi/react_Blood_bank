@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom';
 import { Provider } from 'react-redux'
 import { store } from './store/store'
 import App from './App';
-import Home from './components/home';
 import SignUp from './components/signup';
 import Login from './components/login';
 import Donors from './components/donors';
@@ -22,7 +21,6 @@ ReactDOM.render((
                 <Route path="/login" component={Login}></Route>
                 <Route path="/donorList" component={Donors}></Route>
                 <Route path="/aboutnested" component={NestedAbout}></Route>
-                <Route path="/home" component={Home}> </Route>
                 <Route path="/" component={App}>
                     <IndexRoute component={SignUp} />
                 </Route>

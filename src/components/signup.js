@@ -34,21 +34,19 @@ class Register extends Component {
             email: this.state.email,
             pass: this.state.pass,
             blood: this.state.blood,
-            // type: this.state.type,
-            A: ["A", "O"].indexOf(this.state.blood)!== -1 ? true : null,
-            AB: ["A", "O", "AB", "B"].indexOf(this.state.blood)!== -1 ? true : null,
-            B: ["B", "O"].indexOf(this.state.blood)!== -1 ? true : null,
-            O: ["O"].indexOf(this.state.blood)!== -1 ? true : null
+            A: ["A", "O"].indexOf(this.state.blood) !== -1 ? true : null,
+            AB: ["A", "O", "AB", "B"].indexOf(this.state.blood) !== -1 ? true : null,
+            B: ["B", "O"].indexOf(this.state.blood) !== -1 ? true : null,
+            O: ["O"].indexOf(this.state.blood) !== -1 ? true : null
         }
         FirebaseService.customAuth(newUser).then((user) => {
             multipath[`users/${user.uid}`] = newUser;
             FirebaseService.saveMultipath(multipath)
             newUser['uid'] = this.state.uid
             this.props.signUp(this.state)
-            // console.log(user.uid)
             localStorage.setItem('currentUser', user.uid);
             this.context.router.push({
-                pathname: "/home"
+                pathname: "/donorList"
             })
         }).catch((error) => alert(error.message))
     }

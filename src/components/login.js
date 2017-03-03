@@ -27,7 +27,7 @@ class Login extends Component {
                 this.props.signInUser(user)
                 localStorage.setItem('currentUser', user.uid);
                 this.context.router.push({
-                    pathname: '/home',
+                    pathname: '/donorList',
                     // state: this.props.user
                 })
             })

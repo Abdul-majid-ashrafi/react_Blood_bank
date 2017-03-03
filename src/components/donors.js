@@ -2,85 +2,111 @@ import React, { Component } from 'react';
 import { connect } from 'react-redux'
 import { FindDonors } from '../store/action/auth'
 import { FirebaseService } from '../helpers/firebaseService'
-// import { List, ListItem } from 'material-ui/List';
-// import ActionGrade from 'material-ui/svg-icons/action/grade';
-// import ContentSend from 'material-ui/svg-icons/content/send';
-// import ContentDrafts from 'material-ui/svg-icons/content/drafts';
-// import ActionInfo from 'material-ui/svg-icons/action/info';
-// import Divider from 'material-ui/Divider';
-// import ContentInbox from 'material-ui/svg-icons/content/inbox';
+import RaisedButton from 'material-ui/RaisedButton';
+import Paper from 'material-ui/Paper';
 
 
 class Donors extends Component {
     constructor(props) {
         super(props)
         this.onSearch = this.onSearch.bind(this)
-        // let _self = this
-        // _self.arr = []
+        this.logOut = this.logOut.bind(this)
         this.state = { arr: [] }
     }
-
-
-
     onSearch(e) {
         let _self = this;
         e.preventDefault()
         let ref = FirebaseService.ref.child("/users");
-        // this.todo = [];
-        console.log(this.state.arr)
-        ref.orderByChild(this.refs.data.value.toUpperCase()).equalTo(true).once('value', function (snapshot) {
+        _self.arr = [];
+        ref.orderByChild(this.refs.demo.value).equalTo(true).once('value', function (snapshot) {
             snapshot.forEach(childSnapshot => {
-                _self.state.arr.push(childSnapshot.val());
+                _self.arr.push(childSnapshot.val())
             })
-            // _self.arr.push(snapshot.val())
-            // console.log(this.state)
-            // _self.props.findDonor(todo)
+            _self.props.findDonor(_self.arr)
+            _self.setState({
+                arr: _self.props.storeReducer.user
+            })
         });
-        this.setState({
-            arr: _self.state.arr
-        })
-        console.log(_self.state.arr)
-
-        // console.log(_self.props.storeReducer)
-        // console.log(this.props.storeReducer.user.length)
     }
+logOut(){
+    FirebaseService.auth.signOut().then((u)=> {
+        // console.log(u)
+         this.context.router.push({
+                pathname: "/login"
+            })
+  // Sign-out successful.
+}, (error)=> {
+    alert(error)
+    console.log(error)
+  // An error happened.
+});
+}
     render() {
-        const style = {
-            width: '50%',
-            margin: "0 auto"
-            , border: 'outset 3px'
+        const btn = {
+            margin: "10px"
         }
+        const style = {
+            fontSize: '17px',
+            padding: '2px 23px 2px 23px',
+            boxShadow: '5px 5px 5px black',
+            border: 'outset 3px red'
+        }
+
+        const table = {
+  height: 190,
+  width: 280,
+  margin: 20,
+  padding: 20,
+  textAlign: 'center',
+  display: 'inline-block',
+   background : 'wheat',
+   color : '#009999'
+};
+
         return (
             <div className="App">
+                    <RaisedButton label="LogOut" primary={true} style={btn} onClick={this.logOut} />
+            
+                <h1>Select Your Blood </h1>
                 <form onSubmit={this.onSearch}>
-                    <input type="text" ref="data" />
-                    <button type="submit"> Submit  </button>
+                    <select style={style}
+                        required
+                        ref="demo">
+                        <option>Blood Type   </option>
+                        <option value="A">A+   </option>
+                        <option value="B">B+   </option>
+                        <option value="O">O+   </option>
+                        <option value="AB">AB+</option>
+                    </select>
+                    <br />
+                    <RaisedButton label="Check" type="submit" primary={true} style={btn} />
                 </form>
-                <h1>for example write a or b </h1>
 
-                
                 {this.state.arr.map((v, i) => {
                     return (
-                        // <h1 </h1>
+                <div>
+                    <Paper style={table} zDepth={2}>
 
-                <div style={style}>
                     <table key={i}>
                         <tbody>
                             <tr>
                                 <th>Name</th>
                                 <td>
                             {v.firstname } {v.lastname} </td>
-                            </tr>
+                            <hr/>
+                            </tr> <hr/>
                             <tr>
                                 <th>Email</th>
                                 <td>
                             {v.email} </td>
                             </tr>
+                            <hr/>
                             <tr>
                                 <th>Age</th>
                                 <td>
                             {v.age} </td>
                             </tr>
+                            <hr/>
                             <tr>
                                 <th>Blood Group</th>
                                     <td>
@@ -88,23 +114,18 @@ class Donors extends Component {
                             </tr>
                         </tbody>
                     </table>
+                    </Paper>
                 </div>
-
                     )
-                    // (this.state.arr) ? <h1>{JSON.stringify(this.state.arr)}</h1> : <h1>a</h1>
-                    // (this.props.storeReducer.user.length == 0) ? <h1>{JSON.stringify(this.props.storeReducer.user)}</h1> : <h1>a</h1>
-                    // this.props.storeReducer.map((v, i) => {
-                    //     return (
-                    //         <h1>hello</h1>
-                    //     )
                 })
                 }
             </div>
         );
     }
 }
-
-
+Donors.contextTypes = {
+    router: React.PropTypes.object.isRequired
+}
 const mapStateToProps = (state) => { // mapStateToProps ye iska apna function he
     // console.log(state.UserReducer)
     return {
@@ -114,10 +135,9 @@ const mapStateToProps = (state) => { // mapStateToProps ye iska apna function he
 const mapDispatchToProps = (dispatch) => { // mapDispatchToProps ye iska apna function he
     return {
         findDonor: (data) => {
-            // console.log(data)
+            console.log(data)
             dispatch(FindDonors(data))
         }
     }
 }
 export default connect(mapStateToProps, mapDispatchToProps)(Donors);
-// export default Donors;
